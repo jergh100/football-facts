@@ -46,35 +46,38 @@
     <p><a href="index.html">← Back to all Football Facts</a></p>
   </footer>
 
-  <script>
-    const apiKey = '02e8d79956c86e1eca24011a2bd1a3e8E'; // 👈 Replace with your actual API key
-    fetch("https://v3.football.api-sports.io/standings?league=39&season=2024", {
-      method: "GET",
-      headers: {
-        "x-apisports-key": apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      const standings = data.response[0].league.standings[0];
-      let html = '<table><thead><tr><th>#</th><th>Team</th><th>Pts</th><th>W</th><th>D</th><th>L</th></tr></thead><tbody>';
-      standings.forEach(team => {
-        html += `<tr>
-          <td>${team.rank}</td>
-          <td>${team.team.name}</td>
-          <td>${team.points}</td>
-          <td>${team.all.win}</td>
-          <td>${team.all.draw}</td>
-          <td>${team.all.lose}</td>
-        </tr>`;
-      });
-      html += '</tbody></table>';
-      document.getElementById("table-container").innerHTML = html;
-    })
-    .catch(err => {
-      document.getElementById("table-container").innerText = "Failed to load standings.";
-      console.error(err);
+ <script>
+  const apiKey = 'your_rapidapi_key_here';
+
+  fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=39", {
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+      "x-rapidapi-key": e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const standings = data.response[0].league.standings[0];
+    let html = '<table><thead><tr><th>#</th><th>Team</th><th>Pts</th><th>W</th><th>D</th><th>L</th></tr></thead><tbody>';
+    standings.forEach(team => {
+      html += `<tr>
+        <td>${team.rank}</td>
+        <td>${team.team.name}</td>
+        <td>${team.points}</td>
+        <td>${team.all.win}</td>
+        <td>${team.all.draw}</td>
+        <td>${team.all.lose}</td>
+      </tr>`;
     });
-  </script>
+    html += '</tbody></table>';
+    document.getElementById("table-container").innerHTML = html;
+  })
+  .catch(err => {
+    document.getElementById("table-container").innerText = "Failed to load standings.";
+    console.error(err);
+  });
+</script>
+
 </body>
 </html>
