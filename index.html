@@ -8,44 +8,95 @@
   <meta property="og:description" content="Answering the most searched football questions: match lengths, goals, trivia & more." />
   <title>Football Facts | Most Searched Stats & Trivia</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 700px; margin: 0 auto; padding: 2rem; line-height: 1.6; background: #f9f9f9; color: #222; }
-    h1 { color: #0e6d0e; }
-    .fact-box { background: #fff; padding: 1rem; margin-bottom: 2rem; border-left: 4px solid #0e6d0e; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-    .fact-box h2 { margin-top: 0; }
-    footer { margin-top: 3rem; font-size: 0.9rem; color: #555; }
-    a { color: #0e6d0e; text-decoration: none; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      line-height: 1.6;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    h1 {
+      color: #0e6d0e;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .fact-box {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      border-left: 5px solid #0e6d0e;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+    .fact-box:hover {
+      transform: translateY(-5px);
+    }
+    .fact-box h2 {
+      margin-top: 0;
+      color: #065f46;
+    }
+    .fact-box p {
+      margin: 0.5rem 0;
+    }
+    .fact-box a {
+      color: #0e6d0e;
+      text-decoration: none;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #0e6d0e;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    footer {
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      text-align: center;
+      color: #6b7280;
+    }
   </style>
 </head>
 <body>
   <h1>Football Facts</h1>
-  <p>Welcome to FootballFacts.io — your hub for fast answers to the web's most searched football questions.</p>
+  <p>Welcome to <strong>FootballFacts.io</strong> — your hub for quick, accurate answers to the most searched football questions. Whether you're a trivia nut, fantasy league wizard, or a football fan looking to settle an argument, we've got the facts.</p>
 
-  <div class="fact-box">
-    <h2>How long is a football match?</h2>
-    <p>A standard football match lasts <strong>90 minutes</strong>, split into two 45-minute halves, plus a 15-minute halftime break. Additional stoppage time is added at the referee's discretion.</p>
-    <p><em>Fun Fact:</em> The longest recorded professional match lasted over 3 hours due to multiple extra times and penalties!</p>
+  <div class="grid">
+    <div class="fact-box">
+      <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
+      <p>A standard football match lasts <strong>90 minutes</strong> with added stoppage time and a 15-minute break.</p>
+    </div>
+
+    <div class="fact-box">
+      <h2><a href="most-goals-in-a-premier-league-season.html">Most goals in a Premier League season</a></h2>
+      <p><strong>Erling Haaland</strong> holds the record with <strong>36 goals</strong> in 2022/23.</p>
+    </div>
+
+    <div class="fact-box">
+      <h2><a href="fastest-premier-league-player.html">Fastest Premier League player</a></h2>
+      <p><strong>Kyle Walker</strong> clocked in at 37.31 km/h — the fastest in Premier League history.</p>
+    </div>
+
+    <div class="fact-box">
+      <h2><a href="premier-league-referee-salaries.html">Premier League referee salaries</a></h2>
+      <p>Refs earn about <strong>£1,500 per match</strong> with annual retainers of up to £42,000.</p>
+    </div>
   </div>
 
-  <div class="fact-box">
-    <h2>Most goals in a Premier League season</h2>
-    <p>Erling Haaland set the record with <strong>36 goals</strong> in the 2022/23 Premier League season.</p>
-    <p><em>Historical Highlight:</em> The previous record was held by Andy Cole and Alan Shearer with 34 goals each.</p>
-  </div>
-
-  <div class="fact-box">
-    <h2>Fastest Premier League player</h2>
-    <p>As of the latest data, <strong>Kyle Walker</strong> clocked the fastest top speed in a match: 37.31 km/h.</p>
-    <p>He was closely followed by Mudryk, Nunez, and Adama Traoré.</p>
-  </div>
-
-  <div class="fact-box">
-    <h2>How much do Premier League referees get paid?</h2>
-    <p>Premier League referees earn around <strong>£1,500 per match</strong>, with annual retainers between <strong>£38,000–£42,000</strong>.</p>
-    <p>Top-level international referees earn more when officiating UEFA or FIFA matches.</p>
-  </div>
+  <a class="btn" href="#">See All Facts</a>
 
   <footer>
-    <p>⚽ Like these stats? More coming soon! Suggest a topic or <a href="#">join our trivia list</a>.</p>
+    <p>⚽ Like these stats? More coming soon. Suggest a topic or <a href="#">join our free trivia list</a>.</p>
     <p>&copy; 2025 FootballFacts.io</p>
   </footer>
 </body>
