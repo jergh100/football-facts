@@ -10,11 +10,16 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      max-width: 860px;
       margin: 0 auto;
       padding: 2rem;
       background: #fff;
       color: #000;
+      display: flex;
+      flex-direction: row;
+      max-width: 1200px;
+    }
+    main {
+      flex: 1;
     }
     h1 {
       font-size: 2.5rem;
@@ -51,182 +56,125 @@
       margin: 0.5rem 0;
       font-size: 0.95rem;
     }
+    nav a {
+      color: #0e6d0e;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+    .sidebar {
+      border-left: 1px solid #ddd;
+      padding-left: 1rem;
+      margin-left: 2rem;
+      width: 300px;
+      font-size: 0.9rem;
+    }
+    .sidebar h3 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.3rem;
+      font-size: 1rem;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
     footer {
       margin-top: 3rem;
       font-size: 0.9rem;
       text-align: center;
       color: #666;
+      width: 100%;
     }
-    nav a {
-  color: #0e6d0e;
-  font-weight: bold;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-nav a:hover {
-  text-decoration: underline;
-  opacity: 0.8;
-}
   </style>
 </head>
 <body>
-  <div style="text-align: center; margin-bottom: 2rem;">
-    <img src="logo.png" alt="Football Facts Logo" style="height: 80px;" />
-  </div>
-  <nav style="margin-bottom: 2rem; text-align: center;">
-  <a href="index.html" style="margin-right: 15px; text-decoration: none; font-weight: bold; color: #0e6d0e;">🏠 Home</a>
-  <a href="premier-league-table.html" style="text-decoration: none; font-weight: bold; color: #0e6d0e;">📊 Premier League Table</a>
-</nav>
+  <main>
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <img src="logo.png" alt="Football Facts Logo" style="height: 80px;" />
+    </div>
+    <nav style="margin-bottom: 2rem; text-align: center;">
+      <a href="index.html">🏠 Home</a>
+      <a href="premier-league-table.html">📊 Premier League Table</a>
+    </nav>
 
-  <h1>Football Facts</h1>
-  <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
+    <h1>Football Facts</h1>
+    <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
 
-  <div class="grid">
-    <div class="fact-box">
-      <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
-      <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="most-goals-in-a-premier-league-season.html">Most goals in a Premier League season</a></h2>
-      <p><strong>Erling Haaland</strong> scored <strong>36 goals</strong> in 2022/23 — the most in a single PL season.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="fastest-premier-league-player.html">Fastest Premier League player</a></h2>
-      <p><strong>Kyle Walker</strong> clocked <strong>37.31 km/h</strong> — the league's top sprint speed.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="premier-league-referee-salaries.html">Premier League referee salaries</a></h2>
-      <p>Referees earn up to <strong>£1,500 per match</strong> with annual retainers around <strong>£42,000</strong>.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="worst-premier-league-team.html">Worst Premier League team</a></h2>
-      <p><strong>Derby County</strong> got just <strong>11 points</strong> in 2007/08 — a record low.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="fastest-football-player-ever.html">Fastest football player ever</a></h2>
-      <p><strong>Mbappé</strong>, <strong>Hakimi</strong> and <strong>Davies</strong> have all hit speeds over <strong>36 km/h</strong>.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="what-is-a-hat-trick-in-football.html">What is a hat-trick in football?</a></h2>
-      <p>A hat-trick is when a player scores <strong>three goals</strong> in one match.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="what-do-goalkeepers-wear.html">What do goalkeepers wear?</a></h2>
-      <p>Gloves, padded kits, boots, and sometimes extra protection for dives and collisions.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="brazil-national-football-team-players.html">Brazil national football team players</a></h2>
-      <p>Includes stars like <strong>Vinícius Jr</strong>, <strong>Rodrygo</strong>, <strong>Casemiro</strong> and <strong>Alisson</strong>.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="list-of-premier-league-winners.html">List of Premier League winners</a></h2>
-      <p>All champions since 1992, from Manchester United to Manchester City.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="top-10-premier-league-goal-scorers.html">Top 10 Premier League goal scorers</a></h2>
-      <p><strong>Alan Shearer</strong> tops the list with <strong>260 goals</strong>, followed by Kane and Rooney.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="football-quiz-questions.html">Football quiz questions</a></h2>
-      <p>Challenge yourself with 10 popular trivia questions for fans of all levels.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="biggest-football-stadium-in-the-world.html">Biggest football stadium in the world</a></h2>
-      <p>The <strong>Rungrado 1st of May Stadium</strong> in North Korea holds over <strong>114,000</strong>.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="fastest-red-card-in-football-history.html">Fastest red card in football history</a></h2>
-      <p><strong>Lee Todd</strong> was sent off just <strong>2 seconds</strong> into a match for foul language!</p>
-    </div>
+    <div class="grid">
       <div class="fact-box">
-      <h2><a href="who-invented-football.html">Who invented football?</a></h2>
-      <p>The modern game began in England in the 1800s — with official rules set in 1863.</p>
+        <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
+        <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
+      </div>
+      <!-- 👇 Add more .fact-box entries here -->
     </div>
-    <div class="fact-box">
-      <h2><a href="youngest-premier-league-player.html">Youngest Premier League player</a></h2>
-      <p><strong>Ethan Nwaneri</strong> debuted for Arsenal aged just <strong>15 years, 181 days</strong>.</p>
+  </main>
+
+  <div class="sidebar">
+    <h2 style="margin-bottom: 1rem;">Top 5 Teams</h2>
+    <div class="league-block" id="league-39">
+      <h3>🏴 Premier League</h3>
+      <ul class="team-list"></ul>
     </div>
-    <div class="fact-box">
-      <h2><a href="smallest-premier-league-stadium.html">Smallest stadium in the Premier League</a></h2>
-      <p><strong>Kenilworth Road</strong> (Luton Town) seats just around <strong>11,500</strong>.</p>
+    <div class="league-block" id="league-140">
+      <h3>🇪🇸 La Liga</h3>
+      <ul class="team-list"></ul>
     </div>
-    <div class="fact-box">
-      <h2><a href="what-does-offside-mean.html">What does offside mean in football?</a></h2>
-      <p>Offside prevents attackers from gaining an unfair advantage near the goal.</p>
+    <div class="league-block" id="league-135">
+      <h3>🇮🇹 Serie A</h3>
+      <ul class="team-list"></ul>
     </div>
-    <div class="fact-box">
-      <h2><a href="most-expensive-football-transfer.html">Most expensive football transfer</a></h2>
-      <p><strong>Neymar</strong> moved to PSG in 2017 for a world-record <strong>€222 million</strong>.</p>
+    <div class="league-block" id="league-78">
+      <h3>🇩🇪 Bundesliga</h3>
+      <ul class="team-list"></ul>
     </div>
-    <div class="fact-box">
-      <h2><a href="what-is-var-in-football.html">What is VAR in football?</a></h2>
-      <p>VAR is the Video Assistant Referee system that helps review major decisions.</p>
+    <div class="league-block" id="league-61">
+      <h3>🇫🇷 Ligue 1</h3>
+      <ul class="team-list"></ul>
     </div>
-      <div class="fact-box">
-      <h2><a href="what-is-stoppage-time.html">What is stoppage time in football?</a></h2>
-      <p>It's extra time added at the end of each half to account for delays during play.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="longest-unbeaten-run-in-football.html">Longest unbeaten run in football</a></h2>
-      <p><strong>AC Milan</strong> holds the record in domestic leagues with <strong>58 matches</strong> unbeaten.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="best-footballer-in-the-world.html">Best footballer in the world</a></h2>
-      <p>Messi, Haaland, Mbappé & Bellingham lead the conversation in 2024.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="what-is-a-clean-sheet.html">What is a clean sheet in football?</a></h2>
-      <p>It means a team finishes a match without conceding any goals.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="why-do-players-get-yellow-cards.html">Why do players get yellow cards?</a></h2>
-      <p>For fouls, dissent, time-wasting, or breaking rules like distance violations.</p>
-    </div>
-      <div class="fact-box">
-      <h2><a href="do-footballers-get-paid-weekly.html">Do footballers get paid weekly?</a></h2>
-      <p>Yes — most professionals are paid weekly or monthly based on a set wage in their contract.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="most-red-cards-in-football.html">Most red cards in football history</a></h2>
-      <p><strong>Gerardo Bedoya</strong> leads the all-time list with <strong>46 red cards</strong> in his career.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="oldest-football-player.html">Oldest football player to play professionally</a></h2>
-      <p><strong>Kazuyoshi Miura</strong> is still playing professionally at <strong>57 years old</strong>.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="what-is-a-brace-in-football.html">What is a brace in football?</a></h2>
-      <p>Scoring a brace means scoring <strong>two goals</strong> in one match.</p>
-    </div>
-    <div class="fact-box">
-      <h2><a href="best-football-clubs-of-all-time.html">Best football clubs of all time</a></h2>
-      <p>Clubs like Real Madrid, Man United, and Barcelona top the all-time legends list.</p>
-    </div>
-    <div class="fact-box">
-  <h2><a href="why-do-footballers-tape-their-socks.html">Why do footballers tape their socks?</a></h2>
-  <p>To hold shin pads in place, provide ankle support, or connect grip socks with official kits.</p>
-</div>
-<div class="fact-box">
-  <h2><a href="what-does-ft-mean-in-football.html">What does FT mean in football?</a></h2>
-  <p>FT stands for <strong>Full Time</strong> — it marks the end of a match in scores and broadcasts.</p>
-</div>
-<div class="fact-box">
-  <h2><a href="best-football-boots-for-speed.html">Best football boots for speed</a></h2>
-  <p>Top choices: Nike Mercurial Vapor, Adidas X Crazyfast, Puma Ultra, NB Furon v7.</p>
-</div>
-<div class="fact-box">
-  <h2><a href="what-is-a-false-9-in-football.html">What is a false 9 in football?</a></h2>
-  <p>A striker who drops deep to link play instead of staying forward — Messi is a classic example.</p>
-</div>
-<div class="fact-box">
-  <h2><a href="can-goalkeepers-score-goals.html">Can goalkeepers score goals?</a></h2>
-  <p>Yes — from penalties, corners, or even long clearances. Some have 100+ goals in their career!</p>
-</div>
   </div>
 
   <footer>
     <p>© 2025 FootballFacts.io — All rights reserved.</p>
   </footer>
+
+  <script>
+    const leagues = [
+      { id: 39, name: "Premier League" },
+      { id: 140, name: "La Liga" },
+      { id: 135, name: "Serie A" },
+      { id: 78, name: "Bundesliga" },
+      { id: 61, name: "Ligue 1" }
+    ];
+
+    const apiKey = 'e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37';
+
+    leagues.forEach(league => {
+      fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?season=2024&league=${league.id}`, {
+        method: "GET",
+        headers: {
+          "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
+          "x-rapidapi-key": apiKey
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        const top5 = data.response[0].league.standings[0].slice(0, 5);
+        const ul = document.querySelector(`#league-${league.id} .team-list`);
+        top5.forEach(team => {
+          const li = document.createElement("li");
+          li.textContent = `${team.rank}. ${team.team.name} (${team.points})`;
+          ul.appendChild(li);
+        });
+      })
+      .catch(err => {
+        console.error("Error loading " + league.name, err);
+      });
+    });
+  </script>
 </body>
 </html>
