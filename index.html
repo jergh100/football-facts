@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Football Facts | Most Searched Stats & Trivia</title>
   <meta name="description" content="Quick, SEO-friendly football facts and stats. Find answers to the most searched football trivia and curiosities." />
   <meta property="og:title" content="Football Facts - Fast, Fun, Accurate" />
   <meta property="og:description" content="Answering the most searched football questions: match lengths, goals, trivia & more." />
-  <title>Football Facts | Most Searched Stats & Trivia</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -14,12 +14,7 @@
       padding: 2rem;
       background: #fff;
       color: #000;
-      display: flex;
-      flex-direction: row;
       max-width: 1200px;
-    }
-    main {
-      flex: 1;
     }
     h1 {
       font-size: 2.5rem;
@@ -29,6 +24,16 @@
     p {
       font-size: 1.05rem;
       margin-bottom: 1.5rem;
+    }
+    nav a {
+      color: #0e6d0e;
+      font-weight: bold;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    nav a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
     }
     .grid {
       display: grid;
@@ -56,125 +61,82 @@
       margin: 0.5rem 0;
       font-size: 0.95rem;
     }
-    nav a {
-      color: #0e6d0e;
-      font-weight: bold;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    nav a:hover {
-      text-decoration: underline;
-      opacity: 0.8;
-    }
-    .sidebar {
-      border-left: 1px solid #ddd;
-      padding-left: 1rem;
-      margin-left: 2rem;
-      width: 300px;
-      font-size: 0.9rem;
-    }
-    .sidebar h3 {
-      margin-top: 1.5rem;
-      margin-bottom: 0.3rem;
-      font-size: 1rem;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
     footer {
       margin-top: 3rem;
       font-size: 0.9rem;
       text-align: center;
       color: #666;
-      width: 100%;
+    }
+    .container {
+      display: flex;
+      gap: 2rem;
+    }
+    .sidebar {
+      min-width: 220px;
+      font-size: 0.9rem;
+      color: #111;
+    }
+    .main-content {
+      flex-grow: 1;
     }
   </style>
 </head>
 <body>
-  <main>
-    <div style="text-align: center; margin-bottom: 2rem;">
-      <img src="logo.png" alt="Football Facts Logo" style="height: 80px;" />
+  <div style="text-align: center; margin-bottom: 2rem;">
+    <img src="logo.png" alt="Football Facts Logo" style="height: 80px;" />
+  </div>
+  <nav style="margin-bottom: 2rem; text-align: center;">
+    <a href="index.html">🏠 Home</a>
+    <a href="premier-league-table.html">📊 Premier League Table</a>
+  </nav>
+
+  <div class="container">
+    <div class="sidebar">
+      <h3>Top 5 Teams</h3>
+      <p><strong>🏴 Premier League</strong><br>
+        1. Liverpool (76)<br>2. Arsenal (63)<br>3. Newcastle (59)<br>4. Forest (57)<br>5. Man City (55)
+      </p>
+      <p><strong>🇪🇸 La Liga</strong><br>
+        1. Barcelona (70)<br>2. Real Madrid (66)<br>3. Atletico (63)<br>4. Athletic (57)<br>5. Villarreal (51)
+      </p>
+      <p><strong>🇮🇹 Serie A</strong><br>
+        1. Inter (71)<br>2. Napoli (68)<br>3. Atalanta (61)<br>4. Juventus (59)<br>5. Bologna (57)
+      </p>
+      <p><strong>🇩🇪 Bundesliga</strong><br>
+        1. Bayern (69)<br>2. Leverkusen (63)<br>3. Frankfurt (51)<br>4. Leipzig (48)<br>5. Mainz (46)
+      </p>
+      <p><strong>🇫🇷 Ligue 1</strong><br>
+        1. PSG (74)<br>2. Monaco (53)<br>3. Marseille (52)<br>4. Lyon (51)<br>5. Lille (50)
+      </p>
     </div>
-    <nav style="margin-bottom: 2rem; text-align: center;">
-      <a href="index.html">🏠 Home</a>
-      <a href="premier-league-table.html">📊 Premier League Table</a>
-    </nav>
 
-    <h1>Football Facts</h1>
-    <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
+    <div class="main-content">
+      <h1>Football Facts</h1>
+      <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
+      <div class="grid">
+        <!-- Example Fact Box -->
+        <div class="fact-box">
+          <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
+          <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
+        </div>
 
-    <div class="grid">
-      <div class="fact-box">
-        <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
-        <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
+        <div class="fact-box">
+          <h2><a href="most-goals-in-a-premier-league-season.html">Most goals in a Premier League season</a></h2>
+          <p><strong>Erling Haaland</strong> scored <strong>36 goals</strong> in 2022/23 — the most in a single PL season.</p>
+        </div>
+
+        <div class="fact-box">
+          <h2><a href="fastest-premier-league-player.html">Fastest Premier League player</a></h2>
+          <p><strong>Kyle Walker</strong> clocked <strong>37.31 km/h</strong> — the league's top sprint speed.</p>
+        </div>
+
+        <!-- Add all your other fact boxes here below in same format -->
       </div>
-      <!-- 👇 Add more .fact-box entries here -->
-    </div>
-  </main>
-
-  <div class="sidebar">
-    <h2 style="margin-bottom: 1rem;">Top 5 Teams</h2>
-    <div class="league-block" id="league-39">
-      <h3>🏴 Premier League</h3>
-      <ul class="team-list"></ul>
-    </div>
-    <div class="league-block" id="league-140">
-      <h3>🇪🇸 La Liga</h3>
-      <ul class="team-list"></ul>
-    </div>
-    <div class="league-block" id="league-135">
-      <h3>🇮🇹 Serie A</h3>
-      <ul class="team-list"></ul>
-    </div>
-    <div class="league-block" id="league-78">
-      <h3>🇩🇪 Bundesliga</h3>
-      <ul class="team-list"></ul>
-    </div>
-    <div class="league-block" id="league-61">
-      <h3>🇫🇷 Ligue 1</h3>
-      <ul class="team-list"></ul>
     </div>
   </div>
 
   <footer>
     <p>© 2025 FootballFacts.io — All rights reserved.</p>
   </footer>
-
-  <script>
-    const leagues = [
-      { id: 39, name: "Premier League" },
-      { id: 140, name: "La Liga" },
-      { id: 135, name: "Serie A" },
-      { id: 78, name: "Bundesliga" },
-      { id: 61, name: "Ligue 1" }
-    ];
-
-    const apiKey = 'e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37';
-
-    leagues.forEach(league => {
-      fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?season=2024&league=${league.id}`, {
-        method: "GET",
-        headers: {
-          "x-rapidapi-host": "api-football-v1.p.rapidapi.com",
-          "x-rapidapi-key": apiKey
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        const top5 = data.response[0].league.standings[0].slice(0, 5);
-        const ul = document.querySelector(`#league-${league.id} .team-list`);
-        top5.forEach(team => {
-          const li = document.createElement("li");
-          li.textContent = `${team.rank}. ${team.team.name} (${team.points})`;
-          ul.appendChild(li);
-        });
-      })
-      .catch(err => {
-        console.error("Error loading " + league.name, err);
-      });
-    });
-  </script>
 </body>
 </html>
