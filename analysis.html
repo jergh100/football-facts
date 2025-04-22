@@ -6,112 +6,180 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: Arial, sans-serif;
       padding: 2rem;
       max-width: 960px;
       margin: auto;
+      background: #f9f9f9;
     }
     h1 {
       text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    canvas {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-    }
-    select {
+    select, button {
       display: block;
       margin: 1rem auto;
+      padding: 0.6rem 1.2rem;
       font-size: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    canvas {
+      display: block;
+      margin: 2rem auto;
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
   </style>
 </head>
 <body>
   <h1 id="title">Loading match...</h1>
-  <select id="fixtureSelect">
-    <option value="1035050">Arsenal vs Liverpool</option>
-    <option value="1035051">Chelsea vs Man City</option>
-    <option value="1035052">Barcelona vs Real Madrid</option>
-  </select>
+  <select id="matchSelector"></select>
+  <button onclick="loadSelectedFixture()">Load Match</button>
 
   <canvas id="moodChart" width="900" height="400"></canvas>
 
   <script>
-    function getFixtureId() {
+    const matches = [
+      { id: '1035050', label: 'Arsenal vs Liverpool' },
+      { id: '1035051', label: 'Chelsea vs Man City' },
+      { id: '1035052', label: 'Barcelona vs Real Madrid' },
+      { id: '1035053', label: 'PSG vs Marseille' },
+      { id: '1035054', label: 'Bayern vs Dortmund' }
+    ];
+
+    const selector = document.getElementById('matchSelector');
+    matches.forEach(match => {
+      const option = document.createElement('option');
+      option.value = match.id;
+      option.textContent = match.label;
+      selector.appendChild(option);
+    });
+
+    function getFixtureIdFromURL() {
       const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get('fixture') || document.getElementById('fixtureSelect').value;
+      return urlParams.get('fixture');
     }
 
-    async function drawMoodGraph(fixtureId) {
-      const res = await fetch(`https://footballfacts-analysis.vercel.app/api/mood-graph?fixture=${fixtureId}`);
-      const data = await res.json();
-
-      document.getElementById("title").textContent = `Mood Graph: ${data.home} vs ${data.away}`;
-
-      const ctx = document.getElementById('moodChart').getContext('2d');
-
-      if (window.moodChartInstance) {
-        window.moodChartInstance.destroy();
-      }
-
-      window.moodChartInstance = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: Array.from({ length: 91 }, (_, i) => i),
-          datasets: [
-            {
-              label: data.home,
-              data: data.mood.home,
-              borderColor: 'blue',
-              fill: false,
-              tension: 0.3
-            },
-            {
-              label: data.away,
-              data: data.mood.away,
-              borderColor: 'red',
-              fill: false,
-              tension: 0.3
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            title: {
-              display: true,
-              text: 'Match Emotional Tempo (Mood Graph)'
-            }
-          },
-          scales: {
-            x: {
-              title: {
-                display: true,
-                text: 'Minute'
-              }
-            },
-            y: {
-              title: {
-                display: true,
-                text: 'Mood Score'
-              }
-            }
-          }
-        }
-      });
-    }
-
-    document.getElementById('fixtureSelect').addEventListener('change', (e) => {
-      const fixtureId = e.target.value;
+    function updateURL(fixtureId) {
       const url = new URL(window.location.href);
       url.searchParams.set('fixture', fixtureId);
       window.history.pushState({}, '', url);
-      drawMoodGraph(fixtureId);
-    });
+    }
 
-    // Initial load from URL or dropdown
-    const fixtureId = getFixtureId();
-    drawMoodGraph(fixtureId);
+    function loadSelectedFixture() {
+      const fixtureId = selector.value;
+      updateURL(fixtureId);
+      drawMoodGraph(fixtureId);
+    }
+
+    async function drawMoodGraph(fixtureId) {
+      try {
+        const res = await fetch(`https://footballfacts-analysis.vercel.app/api/mood-graph?fixture=${fixtureId}`);
+        const data = await res.json();
+
+        if (!data.mood) throw new Error('Invalid data received');
+
+        document.getElementById("title").textContent = `Mood Graph: ${data.home} vs ${data.away}`;
+
+        const ctx = document.getElementById('moodChart').getContext('2d');
+
+        if (window.moodChartInstance) {
+          window.moodChartInstance.destroy();
+        }
+
+        const xgHome = data.mood.home.map((val, idx) => val > 0 ? Math.random() * 0.2 + 0.1 : 0);
+        const xgAway = data.mood.away.map((val, idx) => val < 0 ? Math.random() * 0.2 + 0.1 : 0);
+
+        window.moodChartInstance = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels: Array.from({ length: 91 }, (_, i) => i),
+            datasets: [
+              {
+                label: data.home + ' Mood',
+                data: data.mood.home,
+                borderColor: 'blue',
+                fill: false,
+                tension: 0.3
+              },
+              {
+                label: data.away + ' Mood',
+                data: data.mood.away,
+                borderColor: 'red',
+                fill: false,
+                tension: 0.3
+              },
+              {
+                label: data.home + ' xG (Mock)',
+                data: xgHome.reduce((acc, val) => {
+                  const last = acc[acc.length - 1] || 0;
+                  acc.push(last + val);
+                  return acc;
+                }, []),
+                borderColor: 'lightblue',
+                borderDash: [5, 5],
+                fill: false,
+                tension: 0.2
+              },
+              {
+                label: data.away + ' xG (Mock)',
+                data: xgAway.reduce((acc, val) => {
+                  const last = acc[acc.length - 1] || 0;
+                  acc.push(last + val);
+                  return acc;
+                }, []),
+                borderColor: 'pink',
+                borderDash: [5, 5],
+                fill: false,
+                tension: 0.2
+              }
+            ]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              title: {
+                display: true,
+                text: 'Match Emotional Tempo + xG Overlay'
+              },
+              legend: {
+                position: 'top'
+              }
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Minute'
+                }
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Score / xG'
+                },
+                suggestedMin: -10,
+                suggestedMax: 10
+              }
+            }
+          }
+        });
+      } catch (error) {
+        alert('Failed to load mood graph. Check the fixture ID or try again later.');
+        console.error(error);
+      }
+    }
+
+    const initialFixtureId = getFixtureIdFromURL();
+    if (initialFixtureId) {
+      selector.value = initialFixtureId;
+      drawMoodGraph(initialFixtureId);
+    } else {
+      drawMoodGraph(matches[0].id);
+    }
   </script>
 </body>
 </html>
