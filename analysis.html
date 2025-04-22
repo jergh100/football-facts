@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Match Mood Graph | Football Facts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      max-width: 960px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    canvas {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mood Graph: Arsenal vs Liverpool</h1>
+  <canvas id="moodChart" width="900" height="400"></canvas>
+
+  <script>
+    async function drawMoodGraph() {
+      const res = await fetch('https://footballfacts-analysis.vercel.app/api/mood-graph');  // 👈 this is the line
+      const data = await res.json();
+
+      const ctx = document.getElementById('moodChart').getContext('2d');
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: Array.from({ length: 91 }, (_, i) => i), // 0–90 mins
+          datasets: [
+            {
+              label: data.home,
+              data: data.mood.home,
+              borderColor: 'blue',
+              backgroundColor: 'rgba(0,0,255,0.1)',
+              fill: false,
+              tension: 0.3
+            },
+            {
+              label: data.away,
+              data: data.mood.away,
+              borderColor: 'red',
+              backgroundColor: 'rgba(255,0,0,0.1)',
+              fill: false,
+              tension: 0.3
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            title: {
+              display: true,
+              text: 'Match Emotional Tempo (Mood Graph)'
+            }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Minute'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Mood Score'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    drawMoodGraph();
+  </script>
+</body>
+</html>
