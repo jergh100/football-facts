@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Match Mood Graph | Football Facts</title>
+  <title>Football Mood Graph</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -19,29 +19,50 @@
       max-width: 100%;
       height: auto;
     }
+    select {
+      display: block;
+      margin: 1rem auto;
+      font-size: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Mood Graph: Arsenal vs Liverpool</h1>
+  <h1 id="title">Loading match...</h1>
+  <select id="fixtureSelect">
+    <option value="1035050">Arsenal vs Liverpool</option>
+    <option value="1035051">Chelsea vs Man City</option>
+    <option value="1035052">Barcelona vs Real Madrid</option>
+  </select>
+
   <canvas id="moodChart" width="900" height="400"></canvas>
 
   <script>
-    async function drawMoodGraph() {
-      const res = await fetch('https://footballfacts-analysis.vercel.app/api/mood-graph');  // 👈 this is the line
+    function getFixtureId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('fixture') || document.getElementById('fixtureSelect').value;
+    }
+
+    async function drawMoodGraph(fixtureId) {
+      const res = await fetch(`https://footballfacts-analysis.vercel.app/api/mood-graph?fixture=${fixtureId}`);
       const data = await res.json();
+
+      document.getElementById("title").textContent = `Mood Graph: ${data.home} vs ${data.away}`;
 
       const ctx = document.getElementById('moodChart').getContext('2d');
 
-      new Chart(ctx, {
+      if (window.moodChartInstance) {
+        window.moodChartInstance.destroy();
+      }
+
+      window.moodChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: Array.from({ length: 91 }, (_, i) => i), // 0–90 mins
+          labels: Array.from({ length: 91 }, (_, i) => i),
           datasets: [
             {
               label: data.home,
               data: data.mood.home,
               borderColor: 'blue',
-              backgroundColor: 'rgba(0,0,255,0.1)',
               fill: false,
               tension: 0.3
             },
@@ -49,7 +70,6 @@
               label: data.away,
               data: data.mood.away,
               borderColor: 'red',
-              backgroundColor: 'rgba(255,0,0,0.1)',
               fill: false,
               tension: 0.3
             }
@@ -81,7 +101,17 @@
       });
     }
 
-    drawMoodGraph();
+    document.getElementById('fixtureSelect').addEventListener('change', (e) => {
+      const fixtureId = e.target.value;
+      const url = new URL(window.location.href);
+      url.searchParams.set('fixture', fixtureId);
+      window.history.pushState({}, '', url);
+      drawMoodGraph(fixtureId);
+    });
+
+    // Initial load from URL or dropdown
+    const fixtureId = getFixtureId();
+    drawMoodGraph(fixtureId);
   </script>
 </body>
 </html>
