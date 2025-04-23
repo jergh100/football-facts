@@ -30,20 +30,6 @@ nav {
   margin-bottom: 2rem;
 }
 
-nav a {
-  color: #4caf50;
-  font-weight: 600;
-  text-decoration: none;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-nav a:hover {
-  background: #2f4f2f;
-  color: #ffffff;
-}
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
