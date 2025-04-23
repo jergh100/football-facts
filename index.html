@@ -76,6 +76,11 @@
       font-size: 0.9rem;
       color: #111;
     }
+    .sidebar img {
+      height: 18px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
     .main-content {
       flex-grow: 1;
     }
@@ -93,15 +98,14 @@
   <div class="container">
     <div class="sidebar" id="leagueSidebar">
       <h3>Top 5 Leagues</h3>
-      <p>Loading...</p>
+      <p>Loading top leagues...</p>
     </div>
 
     <div class="main-content">
       <h1>Football Facts</h1>
       <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
       <div class="grid">
-        <!-- Fact cards already included in your version -->
-        <!-- Keep all .fact-box entries here -->
+        <!-- All your .fact-box entries remain here -->
           <div class="fact-box">
           <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
           <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
@@ -269,40 +273,52 @@
   </footer>
 
   <script>
-    async function loadLeaguesWithLogos() {
+    async function loadLeagueStandings() {
       const sidebar = document.getElementById('leagueSidebar');
       sidebar.innerHTML = '<h3>Top 5 Leagues</h3>';
-      const topLeagues = ['Premier League', 'La Liga', 'Serie A', 'Bundesliga', 'Ligue 1'];
 
-      try {
-        const res = await fetch('https://api-football-v1.p.rapidapi.com/v3/leagues', {
-          method: 'GET',
-          headers: {
-            'X-RapidAPI-Key': 'e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37',
-            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
-          }
-        });
-        const { response } = await res.json();
-        const filtered = response.filter(l =>
-          topLeagues.includes(l.league.name) && l.seasons.some(s => s.season === 2024)
-        );
+      const leagueIds = {
+        'Premier League': 39,
+        'La Liga': 140,
+        'Serie A': 135,
+        'Bundesliga': 78,
+        'Ligue 1': 61
+      };
 
-        for (let league of filtered) {
-          sidebar.innerHTML += `
-            <p>
-              <img src="${league.league.logo}" alt="${league.league.name}" height="18" style="vertical-align: middle; margin-right: 5px;" />
-              <strong>${league.league.name}</strong><br>
-              <small>${league.country.name}</small>
-            </p>
-          `;
+      const season = 2023; // Update this depending on API data availability
+
+      for (const [name, id] of Object.entries(leagueIds)) {
+        try {
+          const res = await fetch(`https://api-football-v1.p.rapidapi.com/v3/standings?league=${id}&season=${season}`, {
+            method: 'GET',
+            headers: {
+              'X-RapidAPI-Key': 'e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37',
+              'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+            }
+          });
+
+          const data = await res.json();
+          const teams = data.response[0].league.standings[0].slice(0, 5);
+          const logo = data.response[0].league.logo;
+
+          sidebar.innerHTML += `<p><img src="${logo}" alt="${name}" /> <strong>${name}</strong></p>`;
+
+          teams.forEach(team => {
+            sidebar.innerHTML += `
+              <p style="margin-left: 10px; font-size: 0.85rem;">
+                <img src="${team.team.logo}" alt="${team.team.name}" height="14" />
+                ${team.rank}. ${team.team.name} (${team.points})
+              </p>
+            `;
+          });
+        } catch (error) {
+          console.error(`Error loading ${name}:`, error);
+          sidebar.innerHTML += `<p style="color: red">Failed to load ${name}</p>`;
         }
-      } catch (err) {
-        console.error('Failed to load leagues:', err);
-        sidebar.innerHTML += `<p style="color:red">Could not load league data</p>`;
       }
     }
 
-    loadLeaguesWithLogos();
+    loadLeagueStandings();
   </script>
 </body>
 </html>
