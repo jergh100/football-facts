@@ -229,16 +229,32 @@
           const teams = data.response[0].league.standings[0].slice(0, 5);
           const logo = data.response[0].league.logo;
 
-          sidebar.innerHTML += `<p><img src="${logo}" alt="${name}" /> <strong>${name}</strong></p>`;
+          sidebar.innerHTML += `
+            <table>
+              <caption><img src="${logo}" alt="${name}" /> ${name}</caption>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Team</th>
+                  <th>GP</th>
+                  <th>GD</th>
+                  <th>Pts</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${teams.map(team => `
+                  <tr>
+                    <td>${team.rank}</td>
+                    <td><img src="${team.team.logo}" alt="${team.team.name}" /> ${team.team.name}</td>
+                    <td>${team.all.played}</td>
+                    <td>${team.goalsDiff}</td>
+                    <td>${team.points}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `;
 
-          teams.forEach(team => {
-            sidebar.innerHTML += `
-              <p style="margin-left: 10px; font-size: 0.85rem;">
-                <img src="${team.team.logo}" alt="${team.team.name}" height="14" />
-                ${team.rank}. ${team.team.name} (${team.points})
-              </p>
-            `;
-          });
         } catch (error) {
           console.error(`Error loading ${name}:`, error);
           sidebar.innerHTML += `<p style="color: red">Failed to load ${name}</p>`;
