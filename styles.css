@@ -90,26 +90,41 @@ body {
     }
 
     .sidebar {
-      min-width: 250px;
-      font-size: 0.9rem;
+      min-width: 240px;
+      font-size: 0.85rem;
       color: #111;
     }
 
     .sidebar img {
-      height: 20px;
+      height: 16px;
       vertical-align: middle;
       margin-right: 6px;
     }
 
-    .sidebar p {
-      margin: 0.4rem 0;
+    .sidebar table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0 1.2rem 0;
+    }
+
+    .sidebar th, .sidebar td {
+      text-align: left;
+      padding: 0.25rem 0;
+      font-size: 0.8rem;
+    }
+
+    .sidebar th {
+      font-weight: bold;
+      font-size: 0.75rem;
+      color: #444;
+      padding-bottom: 0.2rem;
     }
 
     .sidebar p strong {
       display: inline-block;
-      margin-top: 1.2rem;
+      margin: 1rem 0 0.4rem;
       color: #111;
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
 
     .main-content {
