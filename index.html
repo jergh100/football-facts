@@ -285,7 +285,8 @@
         'Ligue 1': 61
       };
 
-      const season = new Date().getFullYear(); // Update this depending on API data availability
+      const season = new Date();
+      const season = now.getMonth() < 6 ? now.getFullYear() - 1 : now.getFullYear();
 
       for (const [name, id] of Object.entries(leagueIds)) {
         try {
