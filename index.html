@@ -105,8 +105,8 @@
       <h1>Football Facts</h1>
       <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
       <div class="grid">
-        <!-- All your .fact-box entries remain here -->
-          <div class="fact-box">
+        <!-- Fact boxes here -->
+         <div class="fact-box">
           <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
           <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
         </div>
@@ -285,8 +285,9 @@
         'Ligue 1': 61
       };
 
-      const season = new Date();
-      const season = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
+      // Set to most likely correct current season
+      const currentYear = new Date().getFullYear();
+      const season = new Date().getMonth() < 6 ? currentYear - 1 : currentYear;
 
       for (const [name, id] of Object.entries(leagueIds)) {
         try {
@@ -299,6 +300,8 @@
           });
 
           const data = await res.json();
+          if (!data.response || !data.response.length) throw new Error('No response');
+
           const teams = data.response[0].league.standings[0].slice(0, 5);
           const logo = data.response[0].league.logo;
 
