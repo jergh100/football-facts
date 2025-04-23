@@ -35,6 +35,7 @@
       <div class="grid" id="factGrid">
         <!-- Facts will be loaded dynamically -->
       </div>
+      <div id="pagination" style="text-align: center; margin-top: 2rem;"></div>
     </div>
   </div>
 
@@ -109,11 +110,13 @@
 
     async function loadFacts() {
       const factGrid = document.getElementById('factGrid');
+      const pagination = document.getElementById('pagination');
+      const perPage = 12;
+      let currentPage = 1;
+      let allFacts = [];
 
-      try {
-        const res = await fetch('facts.json');
-        const facts = await res.json();
-
+      function renderFacts(facts) {
+        factGrid.innerHTML = '';
         facts.forEach(fact => {
           const div = document.createElement('div');
           div.className = 'fact-box';
@@ -123,6 +126,30 @@
           `;
           factGrid.appendChild(div);
         });
+      }
+
+      function renderPagination() {
+        const pageCount = Math.ceil(allFacts.length / perPage);
+        pagination.innerHTML = '';
+
+        for (let i = 1; i <= pageCount; i++) {
+          const btn = document.createElement('button');
+          btn.innerText = i;
+          btn.className = i === currentPage ? 'active' : '';
+          btn.addEventListener('click', () => {
+            currentPage = i;
+            renderFacts(allFacts.slice((i - 1) * perPage, i * perPage));
+            renderPagination();
+          });
+          pagination.appendChild(btn);
+        }
+      }
+
+      try {
+        const res = await fetch('facts.json');
+        allFacts = await res.json();
+        renderFacts(allFacts.slice(0, perPage));
+        renderPagination();
       } catch (error) {
         console.error('Error loading facts:', error);
         factGrid.innerHTML = '<p style="color: red;">Failed to load facts.</p>';
