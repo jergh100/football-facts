@@ -285,7 +285,7 @@
         'Ligue 1': 61
       };
 
-      const season = 2023; // Update this depending on API data availability
+      const season = new Date().getFullYear(); // Update this depending on API data availability
 
       for (const [name, id] of Object.entries(leagueIds)) {
         try {
