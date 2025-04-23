@@ -91,31 +91,18 @@
   </nav>
 
   <div class="container">
-    <div class="sidebar">
-      <h3>Top 5 Teams 24/25</h3>
-      <p><strong> Premier League</strong><br>
-        1. Liverpool (76)<br>2. Arsenal (63)<br>3. Newcastle (59)<br>4. Forest (57)<br>5. Man City (55)
-      </p>
-      <p><strong> La Liga</strong><br>
-        1. Barcelona (70)<br>2. Real Madrid (66)<br>3. Atletico (63)<br>4. Athletic (57)<br>5. Villarreal (51)
-      </p>
-      <p><strong> Serie A</strong><br>
-        1. Inter (71)<br>2. Napoli (68)<br>3. Atalanta (61)<br>4. Juventus (59)<br>5. Bologna (57)
-      </p>
-      <p><strong> Bundesliga</strong><br>
-        1. Bayern (69)<br>2. Leverkusen (63)<br>3. Frankfurt (51)<br>4. Leipzig (48)<br>5. Mainz (46)
-      </p>
-      <p><strong> Ligue 1</strong><br>
-        1. PSG (74)<br>2. Monaco (53)<br>3. Marseille (52)<br>4. Lyon (51)<br>5. Lille (50)
-      </p>
+    <div class="sidebar" id="leagueSidebar">
+      <h3>Top 5 Leagues</h3>
+      <p>Loading...</p>
     </div>
 
     <div class="main-content">
       <h1>Football Facts</h1>
       <p>Welcome to <strong>FootballFacts.io</strong> — your hub for clean, no-fluff answers to the most searched football questions online.</p>
       <div class="grid">
-        <!-- Example Fact Box -->
-        <div class="fact-box">
+        <!-- Fact cards already included in your version -->
+        <!-- Keep all .fact-box entries here -->
+          <div class="fact-box">
           <h2><a href="how-long-is-a-football-match.html">How long is a football match?</a></h2>
           <p>A football match lasts <strong>90 minutes</strong>, split into two halves, with a halftime break and potential added time.</p>
         </div>
@@ -273,8 +260,6 @@
   <h2><a href="can-goalkeepers-score-goals.html">Can goalkeepers score goals?</a></h2>
   <p>Yes! Some goalkeepers have scored from penalties, free-kicks, and even clearances. Some have 100+ career goals.</p>
 </div>
-
-        <!-- Add all your other fact boxes here below in same format -->
       </div>
     </div>
   </div>
@@ -282,5 +267,42 @@
   <footer>
     <p>© 2025 FootballFacts.io — All rights reserved.</p>
   </footer>
+
+  <script>
+    async function loadLeaguesWithLogos() {
+      const sidebar = document.getElementById('leagueSidebar');
+      sidebar.innerHTML = '<h3>Top 5 Leagues</h3>';
+      const topLeagues = ['Premier League', 'La Liga', 'Serie A', 'Bundesliga', 'Ligue 1'];
+
+      try {
+        const res = await fetch('https://api-football-v1.p.rapidapi.com/v3/leagues', {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': 'e96612b12dmsha3f442fb3afba90p1bfda0jsn021707481a37',
+            'X-RapidAPI-Host': 'api-football-v1.p.rapidapi.com'
+          }
+        });
+        const { response } = await res.json();
+        const filtered = response.filter(l =>
+          topLeagues.includes(l.league.name) && l.seasons.some(s => s.season === 2024)
+        );
+
+        for (let league of filtered) {
+          sidebar.innerHTML += `
+            <p>
+              <img src="${league.league.logo}" alt="${league.league.name}" height="18" style="vertical-align: middle; margin-right: 5px;" />
+              <strong>${league.league.name}</strong><br>
+              <small>${league.country.name}</small>
+            </p>
+          `;
+        }
+      } catch (err) {
+        console.error('Failed to load leagues:', err);
+        sidebar.innerHTML += `<p style="color:red">Could not load league data</p>`;
+      }
+    }
+
+    loadLeaguesWithLogos();
+  </script>
 </body>
 </html>
